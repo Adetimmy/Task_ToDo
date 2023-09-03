@@ -28,6 +28,17 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.date{
+    -ms-overflow-style: none;
+    scrollbar-width: none;  
+}
+.getlen:last-child{
+  margin-bottom: 150px;
+}
+.date::-webkit-scrollbar {
+    display: none;
+}
+
 section{
-  @apply px-4
+  @apply px-4 md:px-14
 }
