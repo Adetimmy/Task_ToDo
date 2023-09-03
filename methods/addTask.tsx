@@ -1,3 +1,4 @@
+import { fetchTasks } from "./fetchTask";
 
 // Add a new task using API
 type Tas ={
@@ -17,8 +18,8 @@ export const addTask = async (task:any) => {
       if (!response.ok) {
         throw new Error(`Error adding task: ${response.status}`);
       }
+
       const data = await response.json();
-      console.log(data)
       return data;
     } catch (error:any) {
       throw new Error(`Error adding task: ${error.message}`);
