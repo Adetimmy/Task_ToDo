@@ -1,4 +1,6 @@
 import { useStateContext } from "@/context/useContext"
+import { updateTask } from "@/methods/updateTask"
+import Frame from "./frame"
 
 interface DataProps{
     completed:boolean,
@@ -6,21 +8,63 @@ interface DataProps{
     title:string
     userId:number
 } 
+export interface task{
+  edit:boolean,
+  add:boolean,
+  show:boolean
+}
+
 
 type C = {
     task:DataProps
 } 
 
 const Task = ({task}:C) => {
+const {task:tasks, setTask, field, setField} = useStateContext()
 
-const handleChange = () => {
+
+const handleChange = async (id:number) => {
+
+  try {
+    const updatedTasks = tasks.map((item:any) => {
+      if (item.id === id) {
+
+        // Toggle the 'completed' field for the matching task
+        return { ...item, completed: !item.completed };
+      }
+      return item;
+    });
+
+    // Update the state with the new tasks
+    setTask(updatedTasks);
+
+    // Update the task on the server
+    await updateTask({ id, completed: updatedTasks.find((task:any) => task.id === id)?.completed });
+
+
+  } catch (error:any) {
+    console.error(`Error handling task change: ${error.message}`);
+  }
+};
+
+const handleOpen = (id:number) => {
+  setField((prev:task) => {
+    return {
+      ...prev,
+      show:!prev.show
+    }
+  })
 }
 
   return (
     <>
-    <section className={`bg-[#F9FAFB] getlen py-2 px-4 my-5  min-w-full  flex items-center h-auto  dark:hover:bg-gray-300 text-[#101828] dark:hover:text-gray-700 shadow-sm hover:shadow-md $`}>
+    <section className={`bg-[#F9FAFB] getlen py-2 px-4 my-5  min-w-full  flex items-center h-auto  dark:hover:bg-gray-300 text-[#101828] dark:hover:text-gray-700 shadow-sm hover:shadow-md $`}
+    onClick={() => handleOpen (task.id)}
+    >
+
+
         <div className="text-[14px] flex gap-5 items-center w-full">
-            <input type="checkbox"  className="radio mr-2 accent-blue-600" checked={task.completed} onChange={() => handleChange}/>
+            <input type="checkbox"  className="radio mr-2 accent-blue-600" checked={task.completed} onChange={() => handleChange(task.id)}/>
             <div className="w-5/6">
                 <article className={` break-words font-semibold ${task.completed? "line-through opacity-40" : ""} `}>{task.title}
                 </article>
@@ -31,6 +75,7 @@ const handleChange = () => {
             <small className="text-[#475467]">Today</small>
       </div>
     </section>
+   
   </>
   )
 }
