@@ -27,7 +27,7 @@ const Tasks = () => {
   return (
     <>
         {
-            tasks?.splice(199,220).map((task:any, i:any) => (
+            tasks?.splice(189,220).map((task:any, i:any) => (
                 <Task task={task} key={i}/>
             ))
         }

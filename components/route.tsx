@@ -29,7 +29,7 @@ export default function Home() {
         <h3 className='font-semibold my-3'>My Tasks</h3>
         <Tasks/>
       </section>
-      <div className='fixed bottom-7 md:w-4/6 md:px-14 w-full px-4 min-h-[45px]'><Input/></div>
+      <div className='fixed bottom-7 md:w-4/6 md:px-14 w-full px-4 h-[48px]'><Input/></div>
     </div>
    <div className={`fixed bottom-0 left-0  trans w-full md:hidden ${field.show? "h-4/6":"h-0"}`}>{field.show && <Frame />}</div> 
    </main>

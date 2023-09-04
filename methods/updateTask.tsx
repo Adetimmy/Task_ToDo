@@ -1,12 +1,12 @@
-import { fetchTasks } from "./fetchTask";
 
-// Add a new task using API
-type Tas ={
-  title:string,
+// updating task using API
+export type Tas ={
+  title?:string,
   completed:false,
-  Userid:1
+  Userid?:1,
+  id?:number
 }
-export const updateTask = async (task:any) => {
+export const updateTask = async (task:Tas) => {
     try {
       const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${task.id}`, {
         method: "PATCH",

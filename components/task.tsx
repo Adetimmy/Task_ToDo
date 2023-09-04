@@ -1,5 +1,6 @@
 import { useStateContext } from "@/context/useContext"
 import { updateTask } from "@/methods/updateTask"
+import { ChangeEvent } from "react"
 // import Frame from "./frame"
 
 interface DataProps{
@@ -20,11 +21,11 @@ type C = {
 } 
 
 const Task = ({task}:C) => {
-const {task:tasks, setTask, field, setField} = useStateContext()
+const {task:tasks, setTask, setField, setTaskValue} = useStateContext()
 
 
-const handleChange = async (id:number) => {
-
+const handleChange = async (e:ChangeEvent<HTMLInputElement>, id:number) => {
+  e.stopPropagation()
   try {
     const updatedTasks = tasks.map((item:any) => {
       if (item.id === id) {
@@ -48,10 +49,13 @@ const handleChange = async (id:number) => {
 };
 
 const handleOpen = (id:number) => {
+  const fort = tasks.map((task:any) => task ).find((task:any) => task.id === id)
+  setTaskValue(fort.title)
   setField((prev:task) => {
     return {
       ...prev,
-      show:!prev.show
+      show:true, 
+      taskId: id
     }
   })
 }
@@ -64,7 +68,7 @@ const handleOpen = (id:number) => {
 
 
         <div className="text-[14px] flex gap-5 items-center w-full">
-            <input type="checkbox"  className="radio mr-2 accent-blue-600" checked={task.completed} onChange={() => handleChange(task.id)}/>
+            <input type="checkbox"  className="radio mr-2 accent-blue-600" checked={task.completed} onChange={(e) => handleChange(e, task.id)}/>
             <div className="w-5/6">
                 <article className={` break-words font-semibold ${task.completed? "line-through opacity-40" : ""} `}>{task.title}
                 </article>

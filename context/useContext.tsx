@@ -14,7 +14,8 @@ const [taskValue, setTaskValue] = useState<string>(" ")
 const [field, setField] = useState<{}>({
   edit:false,
   add:false,
-  show:false
+  show:false,
+  taskId:1
 })
 const { message, mnth, months, yea, week} = greet() as any
 
