@@ -1,5 +1,6 @@
 import { useStateContext } from "@/context/useContext"
 import { deleteTask } from "@/methods/deleteTask"
+import { task } from "./task"
 
 export interface C{
     children:React.ReactNode,
@@ -7,7 +8,7 @@ export interface C{
 }
 
 export const Icon = ({children,icon}:C) => {
-  const {field, task, setTask} = useStateContext()
+  const {field, task, setTask, setField} = useStateContext()
 
   const handleDelete = async (id:number) => {
 
@@ -22,7 +23,12 @@ export const Icon = ({children,icon}:C) => {
        
         // deleting the particular task from the server
         await deleteTask(id)
-        
+        setField((prev:task) => {
+          return {
+            ...prev,
+            show:!prev.show
+          }
+        })
       } catch (error) {
         throw new Error("failed deleting task" + error ) 
       }
