@@ -8,7 +8,7 @@ export interface C{
 }
 
 export const Icon = ({children,icon}:C) => {
-  const {field, task, setTask, setField} = useStateContext()
+  const {field, task, setTask, setField, setTaskValue} = useStateContext()
 
   const handleDelete = async (id:number) => {
 
@@ -29,10 +29,19 @@ export const Icon = ({children,icon}:C) => {
             show:!prev.show
           }
         })
+        setTaskValue("")
       } catch (error) {
         throw new Error("failed deleting task" + error ) 
       }
 
+    }
+    else if(children === "Edit"){
+      setField((prev:task) => {
+        return {
+          ...prev,
+          edit:!prev.edit
+        }
+      })
     }
 else{
   return null
