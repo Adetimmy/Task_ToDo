@@ -1,6 +1,6 @@
 import { useStateContext } from "@/context/useContext"
 import { updateTask } from "@/methods/updateTask"
-import Frame from "./frame"
+// import Frame from "./frame"
 
 interface DataProps{
     completed:boolean,

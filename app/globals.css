@@ -31,7 +31,11 @@ body {
 .date::-webkit-scrollbar {
     display: none;
 }
-
+.trans{
+  transition-property:all;
+  transition-timing-function:ease-in-out;
+  transition-duration: 400ms;
+}
 section{
   @apply px-4 md:px-14
 }
