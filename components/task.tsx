@@ -52,18 +52,21 @@ const handleChange = async (e:ChangeEvent<HTMLInputElement>, id:number) => {
 };
 
 const handleOpen = (id:number, e:any) => {
-  if(e.target.classList[0]){
-    return null
-  }
+  
   const fort = tasks.map((task:any) => task ).find((task:any) => task.id === id)
-  setTaskValue(fort.title)
-  setField((prev:task) => {
-    return {
-      ...prev,
-      show:true, 
-      taskId: id
-    }
-  })
+
+  if(e.target.classList[0].includes("break-words","text-[#475467]")){
+    setTaskValue(fort.title)
+    setField((prev:task) => {
+      return {
+        ...prev,
+        show:true, 
+        taskId: id
+      }
+    })
+  }
+
+
 }
 
   return (
