@@ -3,7 +3,7 @@ import Salutations from '@/components/salutations'
 import Tasks from '@/components/tasks'
 import {HiMenuAlt1} from 'react-icons/hi'
 import Input from './input'
-import Frame from './frame'
+import Frame from './modal'
 import { useStateContext } from '@/context/useContext'
 
 export default function Home() {

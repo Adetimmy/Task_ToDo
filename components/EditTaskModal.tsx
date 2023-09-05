@@ -1,45 +1,53 @@
 import { useStateContext } from "@/context/useContext"
 import {AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai"
 import { Button } from "./editModalbutton"
-import { Icon } from './icon';
+import { Icon } from './CTAbtn';
 import Image from "next/image";
 import Bell from "../asset/bell-03.svg"
 import { FaTimes } from "react-icons/fa";
+import { task } from "./task";
+import { handleClose } from "./handleCloseModalButton";
+import { useState } from "react";
 
 const EditTaskModal = () => {
-    const {taskValue} = useStateContext()
-
+    const { setField, setTaskValue, setEdited, edited } = useStateContext()
+    const [reminder, setReminder] = useState<boolean>(true)
+  
     const btn = [
         {
             title: "Today",
             icon: AiOutlineCalendar
         },
         {
-            title: "8:50am",
+            title: "5:50am",
             icon: AiOutlineClockCircle
         },
         {
-            title: "10:00am",
+            title: "9:00am",
             icon: AiOutlineClockCircle
         },
     ]
   return (
-    <div className="mt-16 ">
-        <input type="text" className="h-[180px] w-full bg-gray-200 p-2 focus:outline-blue-600 border-[2px] text-base font-semibold place-self-start border-gray-400 text-gray-600 rounded-lg" defaultValue={taskValue}/>
+    <div className="mt-2 ">
+        <div className='flex justify-between items-center mb-4'>
+                <p className='text-gray-700 text-lg font-semibold'>{"Edit" }</p>
+                <button className='text-gray-800' type='button' onClick={() => handleClose({setField, setTaskValue})}>< FaTimes size={20}/></button>
+        </div>
+        <input type="text" className="h-[180px] w-full bg-gray-200 break-word p-2 focus:outline-blue-600 border-[2px] text-base font-semibold  border-gray-400 text-gray-600 rounded-lg" onChange={(e) => setEdited(e.target.value)}/>
         <div className="my-5 flex justify-between items-center">
             {btn.map((button:any) => (
                 <Button key={button.title}>{button.title}{<button.icon size={25}/>}</Button>
             ))}
         </div>
-        
+        { reminder &&
         <div className="flex justify-between items-center w-full text-gray-700">
             <div className="flex justify-center gap-2 my-5">
-            <Image src={Bell}  alt="bell-icon" sizes="25"/>
-            <p className="font-semibold text-gray-700 ">10 Minute before</p>
+                <Image src={Bell}  alt="bell-icon" sizes="25"/>
+                <p className="font-semibold text-gray-700 ">10 Minute before</p>
             </div>
-            <FaTimes size={25} />
+            <button onClick={() => setReminder(!reminder)}><FaTimes size={20} /></button>
         </div>
-        
+        }
 
         <div className='flex justify-between items-center mt-4'>
                {

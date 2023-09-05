@@ -11,6 +11,7 @@ interface contextType{
 const ContentProvider = ({children}:contextType) => {
 const [task, setTask] = useState<any>()
 const [taskValue, setTaskValue] = useState<string>(" ")
+const [edited, setEdited] = useState<string>(taskValue)
 const [field, setField] = useState<{}>({
   edit:false,
   add:false,
@@ -21,7 +22,7 @@ const { message, mnth, months, yea, week} = greet() as any
 
     
     return (
-        <StateContext.Provider value={ {task, setTask, message, mnth, months, yea, week, taskValue, setTaskValue, field, setField}}>
+        <StateContext.Provider value={ {task, setTask, message, mnth, months, yea, week, taskValue, setTaskValue, field, setField, edited, setEdited}}>
         {children}
     </StateContext.Provider> 
   )

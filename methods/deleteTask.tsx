@@ -1,6 +1,6 @@
 // delete a task using API
 
-import { Tas } from "./updateTask";
+import { Tas } from "./updateTaskCompleted.Status";
 
 export const deleteTask = async (id: number) => {
   try {

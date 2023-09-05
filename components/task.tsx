@@ -1,5 +1,5 @@
 import { useStateContext } from "@/context/useContext"
-import { updateTask } from "@/methods/updateTask"
+import { updateTask } from "@/methods/updateTaskCompleted.Status"
 import { ChangeEvent } from "react"
 // import Frame from "./frame"
 
@@ -21,6 +21,7 @@ type C = {
 } 
 
 const Task = ({task}:C) => {
+  
 const {task:tasks, setTask, setField, setTaskValue} = useStateContext()
 
 

@@ -16,13 +16,13 @@ export const updateTask = async (task:Tas) => {
         body: JSON.stringify({completed:task.completed}),
       });
       if (!response.ok) {
-        throw new Error(`Error adding task: ${response.status}`);
+        throw new Error(`Error completing task: ${response.status}`);
       }
 
       const updatedData = await response.json();
       return updatedData;
     } catch (error:any) {
-      throw new Error(`Error adding task: ${error.message}`);
+      throw new Error(`Error completing task: ${error.message}`);
     }
   };
   

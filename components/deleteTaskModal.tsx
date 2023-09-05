@@ -1,30 +1,20 @@
 import { FaTimes } from 'react-icons/fa'
-import Button from '@mui/material/Button';
-import { Icon } from './icon';
+import { Icon } from './CTAbtn';
 import {AiOutlineCalendar, AiOutlineClockCircle} from "react-icons/ai"
 import { useStateContext } from '@/context/useContext';
-import { task } from './task';
+import { handleClose } from './handleCloseModalButton';
+
 
 export const DeleteTaskModal = () => {
 
-    const {setField, taskValue, setTaskValue, field} = useStateContext()
+    const {taskValue, setField, setTaskValue} = useStateContext()
 
-    // to close the select task pop-up modal 
-     const handleClose = () => {
-         setField((prev:task) => {
-             return {
-               ...prev,
-               show:false
-             }
-           })
-           setTaskValue("")
-     }
 
   return (
             <div>
-                <div className='flex justify-between items-center'>
-                    <p className='text-gray-700 text-lg font-semibold'>{field.edit && "Edit" }</p>
-                    <button className='text-gray-800' type='button' onClick={handleClose}>< FaTimes size={20}/></button>
+                <div className='flex justify-end items-center mb-3'>
+                    
+                    <button className='text-gray-800' type='button' onClick={() => handleClose({setField, setTaskValue})}>< FaTimes size={20}/></button>
                 </div>
                 <p className='text-gray-600 font-semibold text-base mt'>{taskValue}</p>
                 <div className='flex flex-col gap-2  my-8'>

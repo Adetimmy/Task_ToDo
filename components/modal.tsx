@@ -9,7 +9,7 @@ import EditTaskModal from './EditTaskModal';
 
 
 const Frame = () => {
-    const {setField, taskValue, setTaskValue, field} = useStateContext()
+    const {field} = useStateContext()
 
  
   return (
