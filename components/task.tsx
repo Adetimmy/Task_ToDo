@@ -1,6 +1,6 @@
 import { useStateContext } from "@/context/useContext"
 import { updateTask } from "@/methods/updateTaskCompleted.Status"
-import { ChangeEvent } from "react"
+import { ChangeEvent, ReactComponentElement } from "react"
 // import Frame from "./frame"
 
 interface DataProps{
@@ -21,35 +21,40 @@ type C = {
 } 
 
 const Task = ({task}:C) => {
-  
+
 const {task:tasks, setTask, setField, setTaskValue} = useStateContext()
 
 
 const handleChange = async (e:ChangeEvent<HTMLInputElement>, id:number) => {
-  e.stopPropagation()
-  try {
-    const updatedTasks = tasks.map((item:any) => {
-      if (item.id === id) {
+ 
+    try {
+      const updatedTasks = tasks.map((item:any) => {
+        if (item.id === id) {
+  
+          // Toggle the 'completed' field for the matching task
+          return { ...item, completed: !item.completed };
+        }
+        return item;
+      });
+  
+      // Update the state with the new tasks
+      setTask(updatedTasks);
+  
+      // Update the task on the server
+      await updateTask({ id, completed: updatedTasks.find((task:any) => task.id === id)?.completed });
+  
+  
+    } catch (error:any) {
+      console.error(`Error handling task change: ${error.message}`);
+    }
+  
 
-        // Toggle the 'completed' field for the matching task
-        return { ...item, completed: !item.completed };
-      }
-      return item;
-    });
-
-    // Update the state with the new tasks
-    setTask(updatedTasks);
-
-    // Update the task on the server
-    await updateTask({ id, completed: updatedTasks.find((task:any) => task.id === id)?.completed });
-
-
-  } catch (error:any) {
-    console.error(`Error handling task change: ${error.message}`);
-  }
 };
 
-const handleOpen = (id:number) => {
+const handleOpen = (id:number, e:any) => {
+  if(e.target.classList[0]){
+    return null
+  }
   const fort = tasks.map((task:any) => task ).find((task:any) => task.id === id)
   setTaskValue(fort.title)
   setField((prev:task) => {
@@ -64,7 +69,7 @@ const handleOpen = (id:number) => {
   return (
     <>
     <section className={`bg-[#F9FAFB] getlen py-2 px-4 my-5  min-w-full  flex items-center h-auto  dark:hover:bg-gray-300 text-[#101828] dark:hover:text-gray-700 shadow-sm hover:shadow-md $`}
-    onClick={() => handleOpen (task.id)}
+    onClick={(e) => handleOpen (task.id, e)}
     >
 
 
