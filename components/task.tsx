@@ -22,7 +22,7 @@ type C = {
 
 const Task = ({task}:C) => {
 
-const {task:tasks, setTask, setField, setTaskValue} = useStateContext()
+const {task:tasks, setTask, setField, setTaskValue, time} = useStateContext()
 
 
 const handleChange = async (e:ChangeEvent<HTMLInputElement>, id:number) => {
@@ -81,11 +81,11 @@ const handleOpen = (id:number, e:any) => {
             <div className="w-5/6">
                 <article className={` break-words font-semibold ${task.completed? "line-through opacity-40" : ""} `}>{task.title}
                 </article>
-                <small className={`text-[#475467] ${task.completed? "line-through opacity-40" : ""}`}>12:30 pm - 2:10 pm</small>
+                <small className={`text-[#475467] ${task.completed? "line-through opacity-40" : ""}`}>{time.startTime} - {time.endTime}</small>
             </div>
         </div>
       <div className="">
-            <small className="text-[#475467]">Today</small>
+            <small className="text-[#475467]">{time.calendar}</small>
       </div>
     </section>
    

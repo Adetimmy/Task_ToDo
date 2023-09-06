@@ -5,25 +5,27 @@ import { Icon } from './CTAbtn';
 import Image from "next/image";
 import Bell from "../asset/bell-03.svg"
 import { FaTimes } from "react-icons/fa";
-import { task } from "./task";
+
 import { handleClose } from "./handleCloseModalButton";
 import { useState } from "react";
+import { SetTimer } from "./setTime";
+
 
 const EditTaskModal = () => {
-    const { setField, setTaskValue, setEdited, edited } = useStateContext()
+    const { setField, setTaskValue, setEdited, time, } = useStateContext()
     const [reminder, setReminder] = useState<boolean>(true)
-  
+
     const btn = [
         {
-            title: "Today",
+            title: time.calendar,
             icon: AiOutlineCalendar
         },
         {
-            title: "5:50am",
+            title: time.startTime,
             icon: AiOutlineClockCircle
         },
         {
-            title: "9:00am",
+            title: time.endTime,
             icon: AiOutlineClockCircle
         },
     ]
@@ -35,10 +37,11 @@ const EditTaskModal = () => {
         </div>
         <input type="text" className="h-[180px] w-full bg-gray-200 break-word p-2 focus:outline-blue-600 border-[2px] text-base font-semibold  border-gray-400 text-gray-600 rounded-lg" onChange={(e) => setEdited(e.target.value)}/>
         <div className="my-5 flex justify-between items-center">
-            {btn.map((button:any) => (
-                <Button key={button.title}>{button.title}{<button.icon size={25}/>}</Button>
+            {btn.map((button:any, i) => (
+                <Button key={i}>{button.title}{<button.icon size={25}/>}</Button>
             ))}
         </div>
+         <SetTimer />       
         { reminder &&
         <div className="flex justify-between items-center w-full text-gray-700">
             <div className="flex justify-center gap-2 my-5">
