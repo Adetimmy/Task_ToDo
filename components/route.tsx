@@ -9,35 +9,35 @@ import { AiFillBell, AiFillSetting } from 'react-icons/ai'
 import { Icon } from './CTAbtn'
 import { FaPlus } from 'react-icons/fa'
 import { DesktopCalendarView } from './dektopCalendarView'
-import { Pagination } from '@mui/material'
-import { ChangeEvent } from 'react'
+import { Paginating } from './Pagination'
+import EditTaskModal from './EditTaskModal'
 
 export default function Home() {
-  const {field, message, setPage} = useStateContext()
+  const {field, message } = useStateContext()
 
 
   return (
 
-    <main className="min-h-screen overflow-hidden relative">
+    <main className="min-h-screen m-0 overflow-hidden relative">
 
-      <header className='min-w-full h-24  border-b border-[rgba(107, 114, 128, .1)] p-4 lg:px-14 lg:flex justify-between items-center '>
-        <div className='flex justify-between items-end lg:items-center h-full'>
+      <header className='min-w-full h-24  border-b border-[rgba(107, 114, 128, .1)] p-4 xl:px-14 xl:flex justify-between items-center '>
+        <div className='flex justify-between items-end xl:items-center h-full'>
           <h3 className='font-bold text-lg'>ToDo</h3>
-          <button className='lg:hidden'><HiMenuAlt1 size={26}/></button>
+          <button className='xl:hidden'><HiMenuAlt1 size={26}/></button>
         </div>
-        <div className='hidden lg:flex gap-2'>
+        <div className='hidden xl:flex gap-2'>
           <AiFillSetting/>
           <AiFillBell/>
           {/* <Image src={} alt='user-picture' className='rounded-full'/> */}
         </div>
       </header>
 
-      <div className='flex my-4 justify-between lg:px-14 p-4'>
+      <div className='flex my-4 justify-between xl:px-14 p-4'>
         <div>
           <h3 className="font-semibold text-2xl mb-2">Good {message}!</h3>
-          <small className=" text-gray-600 dark:text-gray-400 font-work lg:text-lg text-base">You got some task to do.</small>
+          <small className=" text-gray-600 dark:text-gray-400 font-work xl:text-lg text-base">You got some task to do.</small>
         </div>
-        <div className="hidden lg:flex self-start justify-end">
+        <div className="hidden xl:flex self-start justify-end">
             <Icon>
               <FaPlus />
               Create New Task
@@ -45,35 +45,38 @@ export default function Home() {
         </div>
       </div>
 
-      <section className='flex justify-between'>
-        <aside className='lg:w-4/6 overflow-hidden lg:border-r-[0.5px] lg:pr-8 border-[rgba(255,255,255,.1)]   lg:h-[37vh] relative '>
-          <div className='lg:fixed lg:w-7/12'>
+      <section className={`flex justify-between`}>
+        <aside className='xl:w-4/6 overflow-hidden xl:border-r-[0.5px] xl:pr-8 border-[rgba(255,255,255,.1)]  lrelative '>
+          <div className=''>
             <Salutations/>
           </div>
           
-          <div className='font-work lg:mt-28 lg:overflow-y-hidden'>
+          <div className='font-work xl:mt-1'>
             <h3 className='font-semibold my-3'>My Tasks</h3>
             <Tasks/>
           </div>
         </aside>
 
-        <aside className='hidden lg:inline'>
+        <aside className={`hidden xl:inline ${field.calendar? "" : 'bg-white ml-3 h-[480px] modal overflow-y-scroll pb-4 rounded-lg p-4'}`}>
+          {
+          field.calendar? 
           <DesktopCalendarView />
+          :
+          <div className=''>
+            <EditTaskModal title='Add' />
+          </div>
+          
+          }
+          
         </aside>
       </section>
 
-      <div className='fixed bottom-7 lg:w-4/6 lg:px-14 w-full px-4 h-[48px]'>
-          <Pagination count={10} color='primary' variant='text' size="large" className='hidden lg:inline'
-              onChange={(event: ChangeEvent<any>, page:number) => {
-                const num:any = event.target?.value || page
-                
-               setPage((num * 10) - 1)
-               }}
-              />
+      <div className='fixed bottom-7 xl:w-4/6 xl:px-14 w-full px-4 h-[48px] z-30 xl:pr-8'>
+        <Paginating />
         <AddInput />
-        </div>
-      <div className={`fixed bottom-0 left-0  trans w-full lg:hidden ${field.show? "h-4/6":"h-0"}`}>{field.show && <ModalPopUp />}</div> 
-
+      </div>
+      <div className={`fixed bottom-0 left-0 z-40  trans w-full flex justify-center xl:hidden ${field.show? "h-4/6":"h-0"}`}>{field.show && <ModalPopUp />}</div> 
+      <div className='h-24 fixed w-full bottom-0 xl:w-[62%] bg-[#111827]'/>
     </main>
   )
 

@@ -1,6 +1,7 @@
 import { deleteTask } from "@/methods/deleteTask"
 import { task } from "./task"
 import { updateTaskInput } from "@/methods/updateTaskInput"
+import { addTask } from "@/methods/addTask"
 
 
 
@@ -46,29 +47,59 @@ export const handleDelete = async (id:number,
 
   // saving modified task
   if( children === "Save"){
-    try {
-      const updatedTasks = task.map((item:any) => {
-        
-        if (item.id === id) {
-  
-          // update with modified field for the matching task
-          return { ...item, title: edited };
-        }
-        return item;
-      });
-      // Update the state with the new tasks
-      setTask(updatedTasks);
-  
-      // Update the task on the server
-      await updateTaskInput({
-        id, title: updatedTasks.find((task: any) => task.id === id)?.title,
-        completed: false
-      });
-      setTaskValue("")
-    } catch (error) {
-      throw new Error("failed editing task" + error ) 
+
+      try {
+        const updatedTasks = task.map((item:any) => {
+          
+          if (item.id === id) {
+    
+            // update with modified field for the matching task
+            return { ...item, title: edited };
+          }
+          return item;
+        });
+        // Update the state with the new tasks
+        setTask(updatedTasks);
+    
+        // Update the task on the server
+        await updateTaskInput({
+          id, title: updatedTasks.find((task: any) => task.id === id)?.title,
+          completed: false
+        });
+        setTaskValue("")
+      } catch (error) {
+        throw new Error("failed editing task" + error ) 
+      }
+     }
+
+//@ts-ignore
+  if( children.includes("Create New Task")){
+    setField((prev:task) => {
+      return {
+        ...prev,
+        add:false,
+        edit:false,
+        show:false,
+        calendar:!prev.calendar
+      }
+    })
+    
     }
-  }
+
+    // adding task to using desktop view
+   
+    if( children === "Add"){
+      try {
+        const newTask = { Userid: 1, title: taskValue, completed: false };
+        const responseData = await addTask(newTask);
+        setTask((prev: any) => [...prev, responseData]);
+      } catch (error) {
+        console.log(error);
+      }
+  
+      setTaskValue('')
+    
+     }
 
 
 else{

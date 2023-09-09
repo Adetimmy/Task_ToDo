@@ -28,10 +28,10 @@ useEffect(() => {
 
 
   return (
-    <div className='flex flex-row gap-3 overflow-x-scroll date mt-4 lg:py-2 pr-8 lg:w-6/6' ref={scrollRef}>
+    <div className='flex flex-row gap-3 overflow-x-scroll date mt-4 xl:py-2 pr-8 xl:w-6/6' ref={scrollRef}>
       {week.map((days: any) => (
         <div
-          className={`${days.i === currentDate ? "bg-[#3F5BF6] text-gray-200 border-0" : ""} flex px-2 py-1.5 lg:py-1 shadow-md text-[#344054] text-[11.5px] lg:text-base font-bold dark:text-gray-100 justify-between items-center flex-col rounded-md min-w-[50px] lg:min-w-[105px] lg:min-h-[75px] min-h-[56px] border-gray-600 border hover:bg-[#3F5BF6]`}
+          className={`${days.i === currentDate ? "bg-[#3F5BF6] text-gray-200 border-0" : ""} flex px-2 py-1.5 xl:py-1 shadow-md text-[#344054] text-[11.5px] xl:text-base font-bold dark:text-gray-100 justify-between items-center flex-col rounded-md min-w-[50px] xl:min-w-[105px] xl:min-h-[75px] min-h-[56px] border-gray-600 border hover:bg-[#3F5BF6]`}
           key={days.i}
         >
           <small>{days.dayOfWeekString}</small>

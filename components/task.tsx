@@ -12,7 +12,8 @@ interface DataProps{
 export interface task{
   edit:boolean,
   add:boolean,
-  show:boolean
+  show:boolean,
+  calendar:boolean
 }
 
 
@@ -23,7 +24,6 @@ type C = {
 const Task = ({task}:C) => {
 
 const {task:tasks, setTask, setField, setTaskValue, time} = useStateContext()
-
 
 const handleChange = async (e:ChangeEvent<HTMLInputElement>, id:number) => {
  

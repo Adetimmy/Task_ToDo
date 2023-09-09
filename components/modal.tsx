@@ -10,11 +10,11 @@ export const ModalPopUp = () => {
 
  
   return (
-    <div className='bg-white h-full w-full rounded-t-xl absolute p-5 '>
+    <div className='sm:w-[400px] bg-white xl:hidden h-full w-full rounded-t-xl absolute p-5 modal overflow-y-scroll '>
       
             
              {  field.edit? 
-                <EditTaskModal />
+                <EditTaskModal title='Edit' />
                 :
                 <DeleteTaskModal/>
              }
