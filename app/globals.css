@@ -21,6 +21,52 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+/* Begin => Cutomization the UI library pagination */
+.MuiPaginationItem-root{
+
+  
+font-size: small;
+width: 20px;
+height: 40px;
+}
+
+.MuiTouchRipple-root{
+  width: 0px;
+  height: 0;
+}
+.MuiPagination-root{
+  background: whitesmoke;  
+  padding: 0 30px;
+  border-top: 1px solid rgb(206, 205, 205);
+  width: 100%;
+}
+.MuiPagination-ul{
+ width: 100%;
+
+}
+.MuiPagination-ul li div{
+    display: flex;
+  align-items: center;
+}
+.MuiPagination-ul li{
+  text-align: center;
+  padding: 2px;
+  width: 11%;
+}
+.MuiPagination-ul li button:hover{
+  background: #3F5BF6;
+}
+
+/* @media (min-width: 768px) { */
+  /* .MuiPagination-ul li{
+     width: 13%;
+  }
+
+} */
+
+/* <= End  of UI library Pagination Cumtomization=> */
+
+
 .date{
     -ms-overflow-style: none;
     scrollbar-width: none;  

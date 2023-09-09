@@ -1,11 +1,10 @@
-"use client"
 import {useEffect, useState} from "react" 
 import Task from "./task"
 import { fetchTasks } from "@/methods/fetchTask"
 import { useStateContext } from "@/context/useContext"
 
 const Tasks = () => {
-    const {task, setTask} = useStateContext()
+    const {task, setTask, page} = useStateContext()
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -22,15 +21,19 @@ const Tasks = () => {
 
       const tasks = task?.map((v:any) => v )
    
+      const start = page - 9
+
+
 
       
   return (
     <>
         {
-            tasks?.splice(189,220).map((task:any, i:any) => (
+            tasks?.slice(start, page).reverse().map((task:any, i:any) => (
                 <Task task={task} key={i}/>
             ))
         }
+
 
         
     </>

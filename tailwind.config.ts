@@ -10,6 +10,7 @@ const config: Config = {
        fontFamily: {
         work: ['Work Sans', 'sans-serif']
     },
+    
   },
   plugins: [],
 }

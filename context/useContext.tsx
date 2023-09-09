@@ -15,12 +15,14 @@ const timing = new Date()
 
 const [task, setTask] = useState<any>()
 const [taskValue, setTaskValue] = useState<string>(" ")
+const [page, setPage] = useState<number>(9)
 const [edited, setEdited] = useState<string>(taskValue)
 const [dateDisplay, setDisplay] = useState<object>({
   calendar:false,
   start:false,
   end:false
 })
+
 const [time, setTime] = useState<{}>({
   startTime:timing.toLocaleTimeString([],{
     hour:"2-digit",
@@ -32,17 +34,19 @@ const [time, setTime] = useState<{}>({
   }),
   calendar:"today"
 })
+
 const [field, setField] = useState<object>({
   edit:false,
   add:false,
   show:false,
   taskId:1
 })
+
 const { message, mnth, months, yea, week} = greet() as any
 
     
     return (
-        <StateContext.Provider value={ {task, setTask, message, mnth, months, yea, week, taskValue, setTaskValue, field, setField, edited, setEdited, time, setTime, dateDisplay, setDisplay}}>
+        <StateContext.Provider value={ {task, setTask, message, mnth, months, yea, week, taskValue, setTaskValue, field, setField, edited, setEdited, time, setTime, dateDisplay, setDisplay, page, setPage}}>
         {children}
     </StateContext.Provider> 
   )

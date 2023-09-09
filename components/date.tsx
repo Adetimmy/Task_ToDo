@@ -9,7 +9,7 @@ const DateHeader = ({mnth, months, year}:DateProp) => {
 
   return (
   <>
-    <div className='mt-8 w-full overflow-hidden'>
+    <div className='overflow-hidden'>
         <p className='font-semibold text-sm'>{months[mnth]}{','} {" "}{year}</p>
         <DateSelection />
     </div>

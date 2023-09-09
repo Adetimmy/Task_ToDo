@@ -12,8 +12,10 @@ import { SetTimer } from "./setTime";
 
 
 const EditTaskModal = () => {
-    const { setField, setTaskValue, setEdited, time, } = useStateContext()
+    const { setField, setTaskValue, setEdited, time, field, taskValue } = useStateContext()
     const [reminder, setReminder] = useState<boolean>(true)
+    const [editField, setEditField] = useState<string>(taskValue)
+
 
     const btn = [
         {
@@ -29,16 +31,22 @@ const EditTaskModal = () => {
             icon: AiOutlineClockCircle
         },
     ]
+
+
+    const handleField = (e:any) => {
+        setEditField(e.target.value)
+        setEdited(editField)
+    }
   return (
-    <div className="mt-2 ">
+    <form className="mt-2" onSubmit={(e) => e.preventDefault() }>
         <div className='flex justify-between items-center mb-4'>
                 <p className='text-gray-700 text-lg font-semibold'>{"Edit" }</p>
                 <button className='text-gray-800' type='button' onClick={() => handleClose({setField, setTaskValue})}>< FaTimes size={20}/></button>
         </div>
-        <input type="text" className="h-[180px] w-full bg-gray-200 break-word p-2 focus:outline-blue-600 border-[2px] text-base font-semibold  border-gray-400 text-gray-600 rounded-lg" onChange={(e) => setEdited(e.target.value)}/>
+        <input type="text" className="h-[180px] w-full bg-gray-200 break-word p-2 focus:outline-blue-600 border-[2px] text-base font-semibold  border-gray-400 text-gray-600 rounded-lg" onChange={handleField} required autoFocus value={editField}/>
         <div className="my-5 flex justify-between items-center">
             {btn.map((button:any, i) => (
-                <Button key={i}>{button.title}{<button.icon size={25}/>}</Button>
+                <Button key={i} id={field.taskId}>{button.title}{<button.icon size={25}/>}</Button>
             ))}
         </div>
          <SetTimer />       
@@ -59,7 +67,7 @@ const EditTaskModal = () => {
                     ))
                }
        </div>
-    </div>
+    </form>
   )
 }
 

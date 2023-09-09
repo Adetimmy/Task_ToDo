@@ -1,14 +1,11 @@
-
-
 import { useStateContext } from '@/context/useContext';
-import { task } from './task';
 import { DeleteTaskModal } from './deleteTaskModal';
 import EditTaskModal from './EditTaskModal';
 
 
 
 
-const Frame = () => {
+export const ModalPopUp = () => {
     const {field} = useStateContext()
 
  
@@ -24,5 +21,3 @@ const Frame = () => {
     </div>
   )
 }
-
-export default Frame
