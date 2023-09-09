@@ -16,7 +16,7 @@ export const Icon = ({children,icon}:C) => {
   const conditionsOnButtonColor = children== 'Edit' ? blueBtn : children === "Save"? blueBtn : children === "Create New Task"? transparentBtn : blueBtn
  
   return (
-    <button className={`flex gap-2 p-2 ${conditionsOnButtonColor} w-[45%] md:w-[176px] font-semibold justify-center items-center border-gray-200 rounded-md`}
+    <button className={`flex gap-2 p-2 ${conditionsOnButtonColor} w-[45%] lg:w-[176px] font-semibold justify-center items-center border-gray-200 rounded-md`}
   onClick={ () => handleDelete(field.taskId, children, {task, setTask, setField, setTaskValue, taskValue, edited})}
     >
         {icon}

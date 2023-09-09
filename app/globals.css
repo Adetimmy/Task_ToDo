@@ -83,5 +83,5 @@ height: 40px;
   transition-duration: 400ms;
 }
 section{
-  @apply px-4 md:px-14
+  @apply px-4 lg:px-14
 }
