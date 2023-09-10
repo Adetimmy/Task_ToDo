@@ -10,14 +10,27 @@ export const ModalPopUp = () => {
 
  
   return (
-    <div className='sm:w-[400px] bg-white xl:hidden h-full w-full rounded-t-xl absolute p-5 modal overflow-y-scroll '>
+    <>
+     <div className='sm:w-[400px] bg-white xl:hidden h-[450px] w-full rounded-t-xl absolute p-5 modal overflow-y-scroll '>
       
             
-             {  field.edit? 
-                <EditTaskModal title='Edit' />
-                :
-                <DeleteTaskModal/>
-             }
+      {  field.edit? 
+         <EditTaskModal />
+         :
+         <DeleteTaskModal/>
+      }
     </div>
+
+    <div className=''>
+      
+            
+      {  field.edit? 
+         <EditTaskModal />
+         :
+         <DeleteTaskModal/>
+      }
+</div>
+    </>
+   
   )
 }

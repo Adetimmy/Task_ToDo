@@ -1,6 +1,5 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { AiOutlineCalendar, AiOutlineClockCircle } from 'react-icons/ai';
-import Image from 'next/image';
 import { FaTimes } from 'react-icons/fa';
 import { useForm } from 'react-hook-form'; 
 import { zodResolver } from '@hookform/resolvers/zod'; 
@@ -8,11 +7,12 @@ import {ZodType, z}  from 'zod';
 import { useStateContext } from '@/context/useContext';
 import { Button } from './editModalbutton';
 import { Icon } from './CTAbtn';
-import Bell from '../asset/bell-03.svg';
-import { handleClose } from './handleCloseModalButton';
 import { SetTimer } from './setTime';
-import {closeModal, Edit} from './multipleHandleEvent';
-import { fetchTasks } from '@/methods/fetchTask';
+import { Notification } from './10minutesNotification';
+import { Add } from './multipleHandleEvent';
+import { handleClose } from './handleCloseModalButton';
+
+import "react-toastify/dist/ReactToastify.css";
 
 
 interface Edit {
@@ -20,8 +20,9 @@ interface Edit {
 }
 
 
-const EditTaskModal = () => {
-  const { setField, setTaskValue, setTask, setEdited, time, field, taskValue, setMessage, setLoading, task, edited, setError  } = useStateContext();
+
+export const AddTaskModal = () => {
+  const { setField, setTaskValue, setTask, setLoading, time, field, taskValue, setError } = useStateContext();
   const [reminder, setReminder] = useState<boolean>(true);
 
 // validation schema using zod to check before submit if the field is empty or not
@@ -48,23 +49,22 @@ const { register, handleSubmit, getValues, formState: { errors }, reset } = useF
     },
   ];
 
-  const handleField = async (data:Edit) => {
-    setTaskValue(getValues().editField)
-    setEdited(data.editField);
-      // access the edited value and process it for 1s
-    setTimeout( async () => {
-      await Edit({setMessage, field, task, setTask, setTaskValue, edited, setLoading, setError, setField})
-      await fetchTasks()
-    }, 1000) 
+  const handleField = async () => {
+   await Add({ setTask, taskValue, setTaskValue, setLoading, setError })
+   
     reset()
-  }; 
-  
+  };
 
   return (
     <form className="mt-2 xl:w-[350px] h-[280px]" onSubmit={handleSubmit(handleField)}>
       <div className="flex justify-between items-center mb-4">
-        <p className="text-gray-700 text-lg font-semibold">Edit</p>
-        <button className="text-gray-800" type="button" onClick={() => handleClose({ setField, setTaskValue })}>
+        <p className="text-gray-700 text-lg font-semibold">Add</p>
+        <button className="text-gray-800" type="button" onClick={() => setField((prev:any) => {
+            return{
+                ...prev,
+                calendar:!prev.calendar
+            }
+        }) }>
           <FaTimes size={20} />
         </button>
       </div>
@@ -88,24 +88,14 @@ const { register, handleSubmit, getValues, formState: { errors }, reset } = useF
         ))}
       </div>
       <SetTimer />
-      {reminder && (
-        <div className="flex justify-between items-center w-full text-gray-700">
-          <div className="flex justify-center gap-2 my-5">
-            <Image src={Bell} alt="bell-icon" sizes="25" />
-            <p className="font-semibold text-gray-700">10 Minute before</p>
-          </div>
-          <button onClick={() => setReminder(!reminder)}>
-            <FaTimes size={20} />
-          </button>
-        </div>
-      )}
+        {reminder && <Notification setReminder={setReminder}/>}
 
       <div className="flex justify-between items-center mt-4">
-        <Icon title='Cancel' type="button" size={200} handle={() => closeModal(setField)}/>
-        <Icon title="Save" type="submit" size={200}/>
+        <Icon title='Cancel' type="button" size={3/6} handle={() => handleClose({setField, setTaskValue})}/>
+        <Icon title='Add' type="submit" size={3/6} />
       </div>
     </form>
   );
 };
 
-export default EditTaskModal;
+

@@ -2,42 +2,57 @@ import { deleteTask } from "@/methods/deleteTask"
 import { task } from "./task"
 import { updateTaskInput } from "@/methods/updateTaskInput"
 import { addTask } from "@/methods/addTask"
+import { toast } from 'react-toastify';
 
-
-
-export const handleDelete = async (id:number,
-  children:React.ReactNode,
-  {task, setTask, setField, setTaskValue, taskValue, edited}:any 
-  ) => {
 
 // deleting a task 
-  if( children === "Delete"){
-    try {
-      
-      //filtering data and matching up with one selected and filtering out deleted task
-      const updatedTasks = task.filter((task:any) => task.id !== id)
-    
-      //updating state with available or non deleted data 
-      setTask(updatedTasks)
-     
-      // deleting the particular task from the server
-      await deleteTask(id)
-      setField((prev:task) => {
-        return {
-          ...prev,
-          show:!prev.show
-        }
-      })
-      setTaskValue("")
-    } catch (error) {
-      throw new Error("failed deleting task" + error ) 
+export const Delete = async ({ task, setTask, setField, setTaskValue, field, setLoading }: any) => {
+  const { taskId: id } = field;
+  setLoading(true);
+  try {
+    // Filter out the task to be deleted
+    const updatedTasks = task.filter((task: any) => task.id !== id);
+
+    // Update the state with the remaining tasks
+    setTask(updatedTasks);
+
+    // Attempt to delete the task from the server
+    await deleteTask(id);
+
+    // If the deletion was successful, update the UI state
+    setField((prev: any) => ({
+      ...prev,
+      show: false,
+      edit: false,
+      add: false,
+      calendar: !prev.calendar,
+    }));
+
+    setLoading(false);
+    setTaskValue("");
+    toast.success("Deleted a task successfully!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (error) {
+    // Handle specific error conditions
+     if (error instanceof Error) {
+      toast.error("Failed to delete task", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      // Handle other unexpected errors
+      toast.error("An unexpected error occurred", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
-
   }
+};
 
+ 
   // perform a same call to action(CTA) on any of button selected
-  else if(children === "Edit" || "Cancel"){
-    setField((prev:task) => {
+
+  export const closeModal =(setField:any) => {
+      setField((prev:task) => {
       return {
         ...prev,
         edit:!prev.edit
@@ -45,64 +60,113 @@ export const handleDelete = async (id:number,
     })
   }
 
-  // saving modified task
-  if( children === "Save"){
+  //updating modified task
+export const Edit = async ({field, task, setTask, setTaskValue, edited, setLoading, setField}:any) => {
+    const {taskId:id} = field
+  try {
+    const updatedTasks = task.map((item:any) => {
+      setLoading(true)
+      if (item.id === id) {
 
-      try {
-        const updatedTasks = task.map((item:any) => {
-          
-          if (item.id === id) {
-    
-            // update with modified field for the matching task
-            return { ...item, title: edited };
-          }
-          return item;
-        });
-        // Update the state with the new tasks
-        setTask(updatedTasks);
-    
-        // Update the task on the server
-        await updateTaskInput({
-          id, title: updatedTasks.find((task: any) => task.id === id)?.title,
-          completed: false
-        });
-        setTaskValue("")
-      } catch (error) {
-        throw new Error("failed editing task" + error ) 
+        // update with modified field for the matching task
+        return { ...item, title: edited };
       }
-     }
+      return item;
+    });
+    // Update the state with the new tasks
+    setTask(updatedTasks);
 
-//@ts-ignore
-  if( children.includes("Create New Task")){
+    // Update the task on the server
+    await updateTaskInput({
+      id, title: updatedTasks.find((task: any) => task.id === id)?.title,
+      completed: false
+    });
     setField((prev:task) => {
       return {
         ...prev,
-        add:false,
-        edit:false,
         show:false,
+        edit:false,
+        add:false,
         calendar:!prev.calendar
+
       }
     })
-    
+    setLoading(false)
+    setTaskValue("")
+    toast.info(`${edited} => Edited `, {
+      position: toast.POSITION.TOP_CENTER
+    });
+    throw new Error(`failed editing ${edited}`) 
+  } catch (error) {
+    // Handle specific error conditions
+    if (error instanceof Error) {
+      toast.info("Failed to edit task", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      // Handle other unexpected errors
+      toast.error("An unexpected error occurred", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }
+}
+  
+
+
+export const editButton = ({setField}:any) => {
+  setField((prev:task) => {
+        return {
+          ...prev,
+          edit:!prev.edit
+        }
+      })
     }
 
-    // adding task to using desktop view
-   
-    if( children === "Add"){
-      try {
-        const newTask = { Userid: 1, title: taskValue, completed: false };
-        const responseData = await addTask(newTask);
-        setTask((prev: any) => [...prev, responseData]);
-      } catch (error) {
-        console.log(error);
-      }
-  
-      setTaskValue('')
-    
-     }
+
+// adding a new task     
+export const Add = async ({setTask, taskValue, setTaskValue, setLoading, setError }:any) => {
+    setLoading(true)
+    try {
+    const newTask = { Userid: 1, title: taskValue, completed: false };
+    const responseData = await addTask(newTask);
+    setTask((prev: any) => [...prev, responseData]);
+    setLoading(false)
+    setTaskValue('')
+    toast.success("Added a task sucessfully!", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    throw new Error(`failed adding ${taskValue}`) 
+  } catch (error) {
+    // Handle specific error conditions
+    if (error instanceof Error) {
+      toast.error("Failed to add task", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      // Handle other unexpected errors
+      toast.error("An unexpected error occurred", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }
 
 
-else{
-return null
+
 }
+
+
+//toggling button for display
+export const createNewTaskButton = (setField:any) => {
+ 
+  setField((prev:task) => {
+    return {
+      ...prev,
+      add:false,
+      edit:false,
+      show:false,
+      calendar:!prev.calendar
+    }
+  })
+  
 }

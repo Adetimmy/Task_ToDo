@@ -11,7 +11,8 @@ export const handleClose = ({setField, setTaskValue }:any) => {
 setField((prev:task) => {
 return {
   ...prev,
-  show:false
+  show:!prev.show,
+  calendar:!prev.calendar,
 }
 })
 setTaskValue("")

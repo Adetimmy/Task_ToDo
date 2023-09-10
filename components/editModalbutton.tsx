@@ -37,6 +37,7 @@ export const Button = ({children, icon}:C) => {
   
     return (
       <button
+      type="button"
         className={`flex flex-row-reverse items-center gap-1 py-2 px-1 w-[32%] font-semibold text-xs justify-center border-[2px] text-gray-700 border-gray-400 rounded-lg`}
         onClick={handleClick}
       >

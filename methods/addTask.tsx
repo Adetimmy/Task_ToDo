@@ -18,7 +18,6 @@ export const addTask = async (task:any) => {
       if (!response.ok) {
         throw new Error(`Error adding task: ${response.status}`);
       }
-      alert('Done')
       const data = await response.json();
       return data;
     } catch (error:any) {

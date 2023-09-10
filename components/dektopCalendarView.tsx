@@ -14,7 +14,7 @@ export const DesktopCalendarView = () => {
         value={date} 
         showDaysOutsideCurrentMonth 
         fixedWeekNumber={6}
-       
+        
         className='bg-white text-gray-700 dark:text-gray-600 border-2px font-extrabold border-1 rounded-md shadow-lg'
         onChange={value => setDate(value) }   
         />

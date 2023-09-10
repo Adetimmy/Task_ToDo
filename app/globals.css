@@ -34,11 +34,9 @@ height: 40px;
   height: 0;
 }
 .MuiPagination-root{
-  background: #ececec;
-  padding: 10px 0px;
-  border-top: 1px solid rgb(135, 134, 134);
-  width: 85.45%;
-  position: absolute;
+  padding: 5px 0px;
+  border-top: 3px solid rgb(135, 134, 134);
+  
 }
 
 .MuiPagination-ul li div{
@@ -48,8 +46,8 @@ height: 40px;
 }
 .MuiPagination-ul li{
   text-align: center;
-  padding: 2px;
-  width: 11%;
+   padding: 7px;
+  width:5rem;
   padding-left: 18px;
 }
 .MuiPagination-ul li button:hover:not(.MuiPaginationItem-root:last-child){
@@ -64,10 +62,7 @@ height: 40px;
 } */
 
 /* <= End  of UI library Pagination Cumtomization=> */
-.save{
-  user-select: none;
-  opacity: 0.03;
-}
+
 
 .date, .modal{
     -ms-overflow-style: none;
