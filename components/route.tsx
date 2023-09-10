@@ -67,7 +67,7 @@ export default function Home() {
             </div>
               
            
-            <div className='absolute bottom-0 left-0 right-0 z-40 bg-[#ececec] w-5' >
+            <div className='absolute bottom-0 left-0 right-0 z-40 bg-[#ececec] border-4 border-[rgba(107, 114, 128, .1)]' >
                 <Paginating />
             </div>
           
