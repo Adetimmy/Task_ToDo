@@ -21,7 +21,7 @@ export const DeleteTaskModal = () => {
                 <div className='flex flex-col gap-2  my-8'>
                     <div className='flex items-center gap-2 text-gray-700'>
                         <AiOutlineCalendar color="blue" size={20} /> 
-                        <small className='font-bold text-xs text-center'>{time.calendar}</small>
+                        <small className='font-bold text-xs text-center uppercase'>{time.calendar}</small>
                     </div>
                     <div className='flex items-center gap-2 text-gray-700'>
                         <AiOutlineClockCircle color="blue" size={20} /> 

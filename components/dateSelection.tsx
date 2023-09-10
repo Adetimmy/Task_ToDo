@@ -12,7 +12,7 @@ useEffect(() => {
   if(currentDate){
     if (scrollRef.current) {
       // Adjust this value to your desired left offset
-      const desiredLeftOffset = 230;
+      const desiredLeftOffset = 350;
       const scrollAmount = scrollRef.current.scrollLeft - desiredLeftOffset;
   
       scrollRef.current.scrollTo({

@@ -71,7 +71,7 @@ export default function Home() {
                 <Paginating />
             </div>
           
-            <div className='h-14 fixed w-full bottom-0 xl:w-[59%] dark:bg-[#111827] bg-[#dddd] z-30'/>
+            <div className='h-14 fixed w-full bottom-0 xl:w-[59%] dark:bg-[#111827] bg-[#fff] z-30'/>
           </>
           }
         </aside>
@@ -92,7 +92,7 @@ export default function Home() {
       <div className='fixed bottom-7 xl:w-4/6 xl:px-14 w-full px-4 h-[48px] z-30 xl:pr-8'>
         <AddInput />
       </div>
-      <div className={`fixed bottom-0 left-0 z-40  trans w-full flex justify-center xl:hidden ${field.show? "h-4/6":"h-0"}`}>{field.show && <ModalPopUp />}</div> 
+      <div className={`fixed bottom-0 left-0 z-50  trans w-full flex justify-center xl:hidden ${field.show? "h-4/6":"h-0"}`}>{field.show && <ModalPopUp />}</div> 
       
     </main>
   )
