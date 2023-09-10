@@ -8,7 +8,7 @@ export const Paginating = () => {
   const { setPage} = useStateContext()
 
   return (
-    <div className='fixed bottom-0 bg-white w-[59.5%]'>
+    <div className='fixed bottom-0 bg-white w-[58.7%]'>
     <Pagination count={10} color='primary' variant='text' size="large" className='hidden xl:inline'
         onChange={(event: ChangeEvent<any>, page:number) => {
         const num:any = event.target?.value || page

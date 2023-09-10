@@ -93,10 +93,9 @@ export const Edit = async ({field, task, setTask, setTaskValue, edited, setLoadi
     })
     setLoading(false)
     setTaskValue("")
-    toast.info(`${edited} => Edited `, {
+    toast.info(`Edited sucessfully`, {
       position: toast.POSITION.TOP_CENTER
     });
-    throw new Error(`failed editing ${edited}`) 
   } catch (error) {
     // Handle specific error conditions
     if (error instanceof Error) {
@@ -136,8 +135,7 @@ export const Add = async ({setTask, taskValue, setTaskValue, setLoading, setErro
     toast.success("Added a task sucessfully!", {
       position: toast.POSITION.TOP_CENTER
     });
-    throw new Error(`failed adding ${taskValue}`) 
-  } catch (error) {
+    } catch (error) {
     // Handle specific error conditions
     if (error instanceof Error) {
       toast.error("Failed to add task", {

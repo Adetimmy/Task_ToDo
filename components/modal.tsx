@@ -11,7 +11,7 @@ export const ModalPopUp = () => {
  
   return (
     <>
-     <div className='sm:w-[400px] bg-white xl:hidden h-[450px] w-full rounded-t-xl absolute p-5 modal overflow-y-scroll '>
+     <div className='sm:w-[450px] bg-white xl:hidden h-[450px] w-full rounded-lg absolute p-5 modal overflow-y-scroll '>
       
             
       {  field.edit? 
@@ -21,7 +21,7 @@ export const ModalPopUp = () => {
       }
     </div>
 
-    <div className=''>
+    <div className='hidden xl:flex'>
       
             
       {  field.edit? 
