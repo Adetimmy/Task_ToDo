@@ -5,7 +5,8 @@ import {HiMenuAlt1} from 'react-icons/hi'
 import { AddInput } from './addTaskInputField'
 import { ModalPopUp } from './modal'
 import { useStateContext } from '@/context/useContext'
-import { AiFillBell, AiFillSetting } from 'react-icons/ai'
+import Ade from "@/asset/ade.jpg" 
+import { AiFillBell, AiFillSetting, AiOutlineBell, AiOutlineSetting } from 'react-icons/ai'
 import { Icon } from './CTAbtn'
 import { FaPlus } from 'react-icons/fa'
 import { DesktopCalendarView } from './dektopCalendarView'
@@ -14,6 +15,7 @@ import { createNewTaskButton } from './multipleHandleEvent'
 import { AddTaskModal } from './addTaskModal'
 import { InfinitySpin } from 'react-loader-spinner'
 import { ToastContainer } from 'react-toastify'
+import Image from 'next/image'
 
 export default function Home() {
   const {field, message, setField, loading} = useStateContext()
@@ -28,10 +30,10 @@ export default function Home() {
           <h3 className='font-bold text-lg'>ToDo</h3>
           <button className='xl:hidden'><HiMenuAlt1 size={26}/></button>
         </div>
-        <div className='hidden xl:flex gap-2'>
-          <AiFillSetting/>
-          <AiFillBell/>
-          {/* <Image src={} alt='user-picture' className='rounded-full'/> */}
+        <div className='hidden xl:flex gap-8 justify-center items-center text-[#667085] dark:bg-gray-300'>
+          <AiOutlineSetting/>
+          <AiOutlineBell/>
+          <Image width={50} src={Ade} alt ='user-picture' className='rounded-full aspect-square bg-cover '/>
         </div>
       </header>
 
@@ -67,7 +69,7 @@ export default function Home() {
             </div>
               
            
-            <div className='absolute bottom-0 left-0 right-0 z-40 bg-[#ececec] border-4 border-[rgba(107, 114, 128, .1)]' >
+            <div className='absolute bottom-0 left-0 right-0 z-40' >
                 <Paginating />
             </div>
           

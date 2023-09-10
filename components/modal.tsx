@@ -21,7 +21,7 @@ export const ModalPopUp = () => {
       }
     </div>
 
-    <div className='hidden xl:flex shadow-xl'>
+    <div className='hidden xl:flex'>
       
             
       {  field.edit? 

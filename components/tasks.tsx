@@ -24,8 +24,6 @@ const Tasks = () => {
    
       const start = page - 9
 
-console.log(tasks?.reverse())
-
       
   return (
     <>
