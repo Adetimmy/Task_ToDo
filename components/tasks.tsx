@@ -4,7 +4,7 @@ import { fetchTasks } from "@/methods/fetchTask"
 import { useStateContext } from "@/context/useContext"
 
 const Tasks = () => {
-    const {task, setTask, page, setLoading, setError,} = useStateContext()
+    const {task, setTask, page, setError,} = useStateContext()
     useEffect(() => {
   
         const fetchData = async () => {
@@ -24,7 +24,7 @@ const Tasks = () => {
    
       const start = page - 9
 
-
+console.log(tasks?.reverse())
 
       
   return (

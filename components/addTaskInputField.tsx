@@ -16,7 +16,7 @@ interface Edit {
 export const AddInput = () => {
   const { taskValue, setTaskValue, setTask, setLoading, setError } = useStateContext();
   const validationSchema: ZodType<Edit> = z.object({
-    editField: z.string().min(5, { message: 'This field is required' }),
+    editField: z.string().min(5, { message: 'must be more than 5 letters' }),
   });
 
   const { register, handleSubmit,getValues,formState: { errors }, reset } = useForm<Edit>({

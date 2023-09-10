@@ -14,7 +14,6 @@ import { SetTimer } from './setTime';
 import {closeModal, Edit} from './multipleHandleEvent';
 import { fetchTasks } from '@/methods/fetchTask';
 
-
 interface Edit {
     editField:string 
 }
@@ -25,7 +24,7 @@ const EditTaskModal = () => {
   const [reminder, setReminder] = useState<boolean>(true);
 
 // validation schema using zod to check before submit if the field is empty or not
-const validationSchema:ZodType<Edit> = z.object({editField: z.string().min(5, {message: 'This field is required'}), });
+const validationSchema:ZodType<Edit> = z.object({editField: z.string().min(5, {message: 'must be more than 5 letters'}), });
                 
 
 const { register, handleSubmit, getValues, formState: { errors }, reset } = useForm<Edit>({
@@ -49,16 +48,13 @@ const { register, handleSubmit, getValues, formState: { errors }, reset } = useF
   ];
 
   const handleField = async (data:Edit) => {
-    setTaskValue(getValues().editField)
-    setEdited(data.editField);
+   ;
       // access the edited value and process it for 1s
     setTimeout( async () => {
-      await Edit({setMessage, field, task, setTask, setTaskValue, edited, setLoading, setError, setField})
-      await fetchTasks()
-    }, 1000) 
+      await Edit({setMessage, field, task, setTask, setTaskValue,taskValue, setLoading, setField})
+       }, 1000) 
     reset()
   }; 
-  
 
   return (
     <form className="mt-2 xl:w-[350px] h-[280px]" onSubmit={handleSubmit(handleField)}>
@@ -74,6 +70,7 @@ const { register, handleSubmit, getValues, formState: { errors }, reset } = useF
           errors.editField ? 'border-red-500' : ''
         }`}
         {...register('editField')}
+        onChange={(e) => setTaskValue(e.target.value)}
          autoFocus
       />
     

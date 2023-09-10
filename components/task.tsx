@@ -56,7 +56,6 @@ const handleOpen = (id:number, e:any) => {
   const fort = tasks.map((task:any) => task ).find((task:any) => task.id === id)
 
   if(e.target.classList[0].includes("break-words","text-[#475467]")){
-    console.log(true)
     setTaskValue(fort.title)
     setField((prev:task) => {
       return {

@@ -61,7 +61,7 @@ export const Delete = async ({ task, setTask, setField, setTaskValue, field, set
   }
 
   //updating modified task
-export const Edit = async ({field, task, setTask, setTaskValue, edited, setLoading, setField}:any) => {
+export const Edit = async ({field, task, setTask, setTaskValue, taskValue, setLoading, setField}:any) => {
     const {taskId:id} = field
   try {
     const updatedTasks = task.map((item:any) => {
@@ -69,7 +69,7 @@ export const Edit = async ({field, task, setTask, setTaskValue, edited, setLoadi
       if (item.id === id) {
 
         // update with modified field for the matching task
-        return { ...item, title: edited };
+        return { ...item, title: taskValue };
       }
       return item;
     });

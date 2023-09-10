@@ -10,10 +10,8 @@ import { Icon } from './CTAbtn'
 import { FaPlus } from 'react-icons/fa'
 import { DesktopCalendarView } from './dektopCalendarView'
 import { Paginating } from './Pagination'
-import EditTaskModal from './EditTaskModal'
-import { Add, createNewTaskButton } from './multipleHandleEvent'
+import { createNewTaskButton } from './multipleHandleEvent'
 import { AddTaskModal } from './addTaskModal'
-import { DeleteTaskModal } from './deleteTaskModal'
 import { InfinitySpin } from 'react-loader-spinner'
 import { ToastContainer } from 'react-toastify'
 
@@ -56,16 +54,18 @@ export default function Home() {
               <h3 className='font-semibold my-3'>My Tasks</h3>
           </div>
           {loading ? 
-          <div className='flex justify-center absolute items-center h-screen w-full'>
-          <InfinitySpin 
-            width='200'
-            color="#3F5BF6"
-          />
+            <div className='flex justify-center absolute items-center h-screen w-full '>
+            <InfinitySpin 
+              width='200'
+              
+            />
           </div> 
           :
           <>
-            
+            <div className='h-full overflow-y-auto modal'>
               <Tasks/>
+            </div>
+              
            
             <div className='absolute bottom-0 left-0 right-0 z-40 bg-[#ececec] w-5' >
                 <Paginating />
@@ -76,7 +76,7 @@ export default function Home() {
           }
         </aside>
 
-        <aside className={`hidden  modal xl:flex justify-center  ${field.calendar? "" : 'bg-white ml-3 overflow-y-scroll pb-4 rounded-lg p-4'} ${field.show? `${field.edit? 'h-[450px]' : 'h-[250px]'}` : 'h-[450px]'}`}>
+        <aside className={`hidden  modal xl:flex justify-center  ${field.calendar? "" : 'bg-white shadow-xl ml-3 overflow-y-scroll pb-4 rounded-lg p-4'} ${field.show? `${field.edit? 'h-[450px]' : 'h-[250px]'}` : 'h-[450px]'}`}>
           {
           field.calendar? 
           <DesktopCalendarView />

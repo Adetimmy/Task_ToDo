@@ -26,7 +26,7 @@ export const AddTaskModal = () => {
   const [reminder, setReminder] = useState<boolean>(true);
 
 // validation schema using zod to check before submit if the field is empty or not
-const validationSchema:ZodType<Edit> = z.object({editField: z.string().min(5, {message: 'This field is required'}), });
+const validationSchema:ZodType<Edit> = z.object({editField: z.string().min(5, {message: 'must be more than 5 letters'}), });
                 
 
 const { register, handleSubmit, getValues, formState: { errors }, reset } = useForm<Edit>({
@@ -74,6 +74,7 @@ const { register, handleSubmit, getValues, formState: { errors }, reset } = useF
           errors.editField ? 'border-red-500' : ''
         }`}
         {...register('editField')}
+        onChange={(e) => setTaskValue(e.target.value)}
          autoFocus
       />
     

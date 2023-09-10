@@ -4,7 +4,7 @@
 
 export const fetchTasks = async () => {
     try {
-      const response = await fetch("https://jsonplaceholder.typicode.com/todos", {next: {revalidate:5}});
+      const response = await fetch("https://jsonplaceholder.typicode.com/todos");
       if (!response.ok) {
         throw new Error(`Error fetching tasks: ${response.status}`);
       }
