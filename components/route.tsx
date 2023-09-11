@@ -61,8 +61,9 @@ export default function Home() {
           <div className='font-work xl:mt-1'>
               <h3 className='font-semibold my-3'>My Tasks</h3>
           </div>
-{          loading ? 
-           ( <div className='flex justify-center absolute items-center w-full '>
+          <div className="relative w-full ">
+          {          loading ? 
+           ( <div className='flex justify-center absolute items-center w-full top-0 '>
                 <InfinitySpin 
                   width='200'
                   color='blue' 
@@ -72,7 +73,9 @@ export default function Home() {
            ( <div className='h-full overflow-y-auto modal'>
               <Tasks/>
             </div>)
-            }
+          }
+          </div>
+
 
             <div className='absolute bottom-0 left-0 right-0 z-40' >
                 <Paginating />
