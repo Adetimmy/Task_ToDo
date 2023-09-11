@@ -1,7 +1,7 @@
 import { useStateContext } from "@/context/useContext"
 import { updateTask } from "@/methods/updateTaskCompleted.Status"
 import { ChangeEvent, ReactComponentElement } from "react"
-// import Frame from "./frame"
+import { toast } from 'react-toastify';
 
 interface DataProps{
     completed:boolean,
@@ -44,8 +44,11 @@ const handleChange = async (e:ChangeEvent<HTMLInputElement>, id:number) => {
       await updateTask({ id, completed: updatedTasks.find((task:any) => task.id === id)?.completed });
   
   
-    } catch (error:any) {
-      console.error(`Error handling task change: ${error.message}`);
+    } catch (error) {
+      toast.error("An unexpected error occurred", {
+        position: toast.POSITION.TOP_CENTER,
+      })
+
     }
   
 

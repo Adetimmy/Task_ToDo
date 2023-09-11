@@ -20,7 +20,6 @@ const [page, setPage] = useState<number>(9)
 const [screenSize, setScreenSize] = useState< number>(0)
 const [edited, setEdited] = useState<string>(taskValue)
 const [loading, setLoading] = useState<boolean>(false)
-const [error, setError] = useState<string | null>(null)
 const [dateDisplay, setDisplay] = useState<object>({
   calendar:false,
   start:false,
@@ -36,7 +35,7 @@ const [time, setTime] = useState<{}>({
     hour:"2-digit",
     minute:"2-digit"
   }),
-  calendar:new Date().toDateString()
+  calendar:new Date().toLocaleDateString()
 })
 
 const [field, setField] = useState<object>({
@@ -85,7 +84,7 @@ useEffect(() => {
 
     return (
         <StateContext.Provider value={ {task, setTask, message, mnth, months, yea, week, taskValue, setTaskValue, field, setField, edited, setEdited, time, setTime, dateDisplay, setDisplay, page, setPage, loading, setLoading,
-          error, setError}}>
+        }}>
         {children}
     </StateContext.Provider> 
   )

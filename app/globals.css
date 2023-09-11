@@ -77,7 +77,7 @@ height: 40px;
 .trans{
   transition-property:all;
   transition-timing-function:ease-in-out;
-  transition-duration: 400ms;
+  transition-duration: 500ms;
 }
 section{
   @apply px-4 xl:px-14

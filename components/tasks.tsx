@@ -4,18 +4,19 @@ import { fetchTasks } from "@/methods/fetchTask"
 import { useStateContext } from "@/context/useContext"
 
 const Tasks = () => {
-    const {task, setTask, page, setError,} = useStateContext()
+    const {task, setTask, page, setError} = useStateContext()
+   
     useEffect(() => {
-  
+      
         const fetchData = async () => {
           try {
             const fetchedTasks = await fetchTasks(); // Fetch your tasks from API
             setTask(fetchedTasks);
             throw new Error("Error fetching tasks");
           } catch (error) {
-            setError(error)
+           console.error(error)
           }
-        
+      
         };
         fetchData();
       }, []);

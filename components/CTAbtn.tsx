@@ -1,6 +1,3 @@
-import { useStateContext } from "@/context/useContext"
-// import { handleDelete } from "./multipleHandleEvent"
-
 export interface C{
     children:React.ReactNode,
     icon?:React.ReactNode,
@@ -23,7 +20,6 @@ type ButtonProps = {
 
 export const Icon = ({icon,title, handle, type, size, handleClick}:ButtonProps) => {
 
-  const {field, task, setTask, setField, setTaskValue, taskValue, edited} = useStateContext()
 
   const transparentBtn = "text-gray-600 border-2 border-gray-300 hover:bg-blue-600 hover:border-transparent hover:text-gray-200"
   const blueBtn = "bg-blue-600 border-transparent hover:bg-transparent hover:border-2 hover:text-gray-600 hover:border-gray-300 text-gray-50"
